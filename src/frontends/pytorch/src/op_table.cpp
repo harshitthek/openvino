@@ -95,6 +95,7 @@ OP_CONVERTER(translate_erfc);
 OP_CONVERTER(translate_expand);
 OP_CONVERTER(translate_expand_as);
 OP_CONVERTER(translate_exp);
+OP_CONVERTER(translate_exp2);
 OP_CONVERTER(translate_expm1);
 OP_CONVERTER(translate_eye);
 OP_CONVERTER(translate_fake_quantize_per_channel_affine);
@@ -530,6 +531,8 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
          op::optional_out<op::translate_1to1_match_1_inputs_with_fp32_type_alignment<ov::op::v17::ErfInv>, 1>},
         {"aten::exp", op::optional_out<op::translate_exp, 1>},
         {"aten::exp_", op::inplace_op<op::translate_exp>},
+        {"aten::exp2", op::optional_out<op::translate_exp2, 1>},
+        {"aten::exp2_", op::inplace_op<op::translate_exp2>},
         {"aten::expand", op::translate_expand},
         {"aten::expand_copy", op::translate_expand},
         {"aten::expand_as", op::translate_expand_as},
@@ -975,6 +978,8 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.erfc.default", op::translate_erfc},
         {"aten.erfinv.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<ov::op::v17::ErfInv>},
         {"aten.exp.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Exp>},
+        {"aten.exp2.default", op::translate_exp2},
+        {"aten.exp2_.default", op::inplace_op<op::translate_exp2>},
         {"aten.expm1.default", op::translate_expm1},
         {"aten.expand.default", op::translate_expand},
         {"aten.expand_copy.default", op::translate_expand},
